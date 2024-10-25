@@ -6,9 +6,49 @@ vi.mock("./useScoreboard", () => ({
   useScoreboard: vi.fn(),
 }));
 
+import { useScoreboard } from "./useScoreboard";
+
 describe("Scoreboard", () => {
   beforeEach(() => {
     vi.resetAllMocks();
+  });
+
+  it("shows loading spinner when loading", () => {
+    (useScoreboard as any).mockReturnValue({
+      games: [],
+      isLoading: true,
+      error: null,
+    });
+
+    render(<Scoreboard />);
+    expect(screen.getByTestId("loading-spinner")).toBeTruthy();
+  });
+
+  it("shows error message with retry button", () => {
+    const errorMessage = "Failed to load games";
+    (useScoreboard as any).mockReturnValue({
+      games: [],
+      isLoading: false,
+      error: errorMessage,
+    });
+
+    render(<Scoreboard />);
+    expect(screen.getByTestId("error-container")).toBeTruthy();
+    expect(screen.getByTestId("error-message")).toHaveTextContent(errorMessage);
+    expect(screen.getByTestId("retry-button")).toHaveTextContent("Retry");
+  });
+
+  it("shows no games message when empty", () => {
+    (useScoreboard as any).mockReturnValue({
+      games: [],
+      isLoading: false,
+      error: null,
+    });
+
+    render(<Scoreboard />);
+    expect(screen.getByTestId("no-games-message")).toHaveTextContent(
+      "No live games at the moment"
+    );
   });
 
   it("renders single game correctly", () => {
@@ -19,8 +59,17 @@ describe("Scoreboard", () => {
       awayScore: 6,
     };
 
+    (useScoreboard as any).mockReturnValue({
+      games: [mockGame],
+      isLoading: false,
+      error: null,
+    });
+
     render(<Scoreboard />);
 
+    expect(screen.getByTestId("scoreboard-title")).toHaveTextContent(
+      "Football Score Board"
+    );
     expect(
       screen.getByTestId(`game-item-${mockGame.homeTeam}-${mockGame.awayTeam}`)
     ).toBeTruthy();
@@ -53,6 +102,12 @@ describe("Scoreboard", () => {
         awayScore: 2,
       },
     ];
+
+    (useScoreboard as any).mockReturnValue({
+      games: mockGames,
+      isLoading: false,
+      error: null,
+    });
 
     render(<Scoreboard />);
 

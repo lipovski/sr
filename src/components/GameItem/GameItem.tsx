@@ -1,6 +1,20 @@
+import { IGame } from "../../types/game";
 import { EditScore, GameButtons, GameScore } from "../index";
 
-export const GameItem: React.FC<any> = ({
+interface GameItemProps {
+  game: IGame;
+  isEditing: boolean;
+  newHomeScore: string;
+  newAwayScore: string;
+  startEditing: (game: IGame) => void;
+  handleUpdateScore: (homeTeam: string, awayTeam: string) => void;
+  cancelEditing: () => void;
+  finishGame: (homeTeam: string, awayTeam: string) => void;
+  setNewHomeScore: (score: string) => void;
+  setNewAwayScore: (score: string) => void;
+}
+
+export const GameItem: React.FC<GameItemProps> = ({
   game,
   isEditing,
   newHomeScore,

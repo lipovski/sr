@@ -1,4 +1,13 @@
-export const EditScore: React.FC<any> = ({
+interface EditScoreProps {
+  homeTeam: string;
+  awayTeam: string;
+  newHomeScore: string;
+  newAwayScore: string;
+  onHomeScoreChange: (value: string) => void;
+  onAwayScoreChange: (value: string) => void;
+}
+
+export const EditScore: React.FC<EditScoreProps> = ({
   homeTeam,
   awayTeam,
   newHomeScore,

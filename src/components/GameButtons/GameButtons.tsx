@@ -1,4 +1,14 @@
-export const GameButtons: React.FC<any> = ({
+interface GameButtonsProps {
+  homeTeam: string;
+  awayTeam: string;
+  isEditing: boolean;
+  onStartEdit: () => void;
+  onSave: () => void;
+  onCancel: () => void;
+  onFinish: () => void;
+}
+
+export const GameButtons: React.FC<GameButtonsProps> = ({
   homeTeam,
   awayTeam,
   isEditing,

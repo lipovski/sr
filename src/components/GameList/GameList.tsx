@@ -1,6 +1,20 @@
+import { IGame } from "../../types/game";
 import { GameItem } from "../index";
 
-export const GameList: React.FC<any> = (props) => {
+interface GameListProps {
+  games: IGame[];
+  editingGame: string | null;
+  newHomeScore: string;
+  newAwayScore: string;
+  startEditing: (game: IGame) => void;
+  handleUpdateScore: (homeTeam: string, awayTeam: string) => void;
+  cancelEditing: () => void;
+  finishGame: (homeTeam: string, awayTeam: string) => void;
+  setNewHomeScore: (score: string) => void;
+  setNewAwayScore: (score: string) => void;
+}
+
+export const GameList: React.FC<GameListProps> = (props) => {
   const { games } = props;
 
   if (games.length === 0) {

@@ -1,4 +1,8 @@
-export const ErrorMessage: React.FC<any> = ({ error }) => (
+interface ErrorMessageProps {
+  error: string;
+}
+
+export const ErrorMessage: React.FC<ErrorMessageProps> = ({ error }) => (
   <div className="max-w-2xl mx-auto p-6">
     <div
       data-testid="error-container"

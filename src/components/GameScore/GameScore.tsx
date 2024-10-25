@@ -1,4 +1,11 @@
-export const GameScore: React.FC<any> = ({
+interface GameScoreProps {
+  homeTeam: string;
+  awayTeam: string;
+  homeScore: number;
+  awayScore: number;
+}
+
+export const GameScore: React.FC<GameScoreProps> = ({
   homeTeam,
   awayTeam,
   homeScore,
