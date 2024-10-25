@@ -27,11 +27,6 @@ describe("GameService", () => {
       const game = new Game("Team1", "Team2", 3, 2);
       expect(game.getTotalScore()).toBe(5);
     });
-
-    it("should format toString correctly", () => {
-      const game = new Game("Team1", "Team2", 3, 2);
-      expect(game.toString()).toBe("Team1 3 - Team2 2");
-    });
   });
 
   describe("GameService Initialization", () => {

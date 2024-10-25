@@ -16,10 +16,6 @@ export class Game implements IGame {
   getTotalScore(): number {
     return this.homeScore + this.awayScore;
   }
-
-  toString(): string {
-    return `${this.homeTeam} ${this.homeScore} - ${this.awayTeam} ${this.awayScore}`;
-  }
 }
 
 export class GameService implements IGameService {
